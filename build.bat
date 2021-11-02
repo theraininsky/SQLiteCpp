@@ -1,3 +1,4 @@
+set buildtype=%1%
 @REM Copyright (c) 2012-2018 Sebastien Rombauts (sebastien.rombauts@gmail.com)
 @REM
 @REM Distributed under the MIT License (MIT) (See accompanying file LICENSE.txt
@@ -6,11 +7,11 @@ mkdir build
 cd build
 
 @REM Generate a Visual Studio solution for latest version found
-cmake -DSQLITECPP_BUILD_EXAMPLES=ON -DSQLITECPP_BUILD_TESTS=ON ..
+cmake -DSQLITECPP_BUILD_EXAMPLES=OFF -DSQLITECPP_BUILD_TESTS=OFF -DSQLITECPP_RUN_CPPLINT=OFF ..
 if ERRORLEVEL 1 goto onError
 
 @REM Build default configuration (ie 'Debug')
-cmake --build .
+cmake --build . --config %buildtype%
 if ERRORLEVEL 1 goto onError
 
 @REM Build and run tests
